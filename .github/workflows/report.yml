@@ -11,6 +11,7 @@ env:
   DAILY_REPORT_FROM: ${{ secrets.DAILY_REPORT_FROM }}
   DAILY_REPORT_TO: ${{ secrets.DAILY_REPORT_TO }}
   ACCUWEATHER_API_KEY: ${{ secrets.ACCUWEATHER_API_KEY }}
+  TENOR_API_KEY: ${{ secrets.TENOR_API_KEY }}
 
 jobs:
   report:

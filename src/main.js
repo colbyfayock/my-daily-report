@@ -17,6 +17,10 @@ const fetch = require('node-fetch');
   const forecastRequest = await fetch(`${forecastEndpoint}?apikey=${process.env.ACCUWEATHER_API_KEY}`);
   const forecastData = await forecastRequest.json();
 
+  const gifEndpoint = `https://g.tenor.com/v1/trending`;
+  const gifRequest = await fetch(`${gifEndpoint}?contentfilter=low&limit=1&key=${process.env.TENOR_API_KEY}`);
+  const gifData = await gifRequest.json();
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -38,6 +42,8 @@ Weather
 - Forecast: ${forecastData.Headline.Text}
 - Temp Min: ${forecastData.DailyForecasts[0].Temperature.Minimum.Value}° ${forecastData.DailyForecasts[0].Temperature.Minimum.Unit}
 - Temp Max: ${forecastData.DailyForecasts[0].Temperature.Maximum.Value}° ${forecastData.DailyForecasts[0].Temperature.Maximum.Unit}
+
+Daily Gif: ${gifData.results[0].url}
     `,
     html: `
       <h1>Daily Report</h1>
@@ -45,6 +51,7 @@ Weather
       <p>Forecast: ${forecastData.Headline.Text}</p>
       <p>Temp Min: ${forecastData.DailyForecasts[0].Temperature.Minimum.Value}° ${forecastData.DailyForecasts[0].Temperature.Minimum.Unit}</p>
       <p>Temp Max: ${forecastData.DailyForecasts[0].Temperature.Maximum.Value}° ${forecastData.DailyForecasts[0].Temperature.Maximum.Unit}</p>
+      <p><img src="${gifData.results[0].media[0].tinygif.url}" /></p>
     `,
   });
 
