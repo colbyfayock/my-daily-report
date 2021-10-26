@@ -10,6 +10,7 @@ env:
   MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
   DAILY_REPORT_FROM: ${{ secrets.DAILY_REPORT_FROM }}
   DAILY_REPORT_TO: ${{ secrets.DAILY_REPORT_TO }}
+  ACCUWEATHER_API_KEY: ${{ secrets.ACCUWEATHER_API_KEY }}
 
 jobs:
   report:
