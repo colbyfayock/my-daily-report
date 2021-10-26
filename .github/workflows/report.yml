@@ -1,0 +1,26 @@
+name: Report
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+env:
+  MAIL_USER: ${{ secrets.MAIL_USER }}
+  MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+  DAILY_REPORT_FROM: ${{ secrets.DAILY_REPORT_FROM }}
+  DAILY_REPORT_TO: ${{ secrets.DAILY_REPORT_TO }}
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - run: yarn install --frozen-lockfile
+
+      - run: node src/main.js
